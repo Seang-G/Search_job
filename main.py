@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request
 from datetime import datetime
 from itertools import product
+from pretty_html_table import build_table
 import pandas as pd
 import data
 import os
@@ -18,14 +19,27 @@ def result():
 
     sites_n_languages = list(product(selected_sites, selected_languages))
     df_dic = {}
-    print(sites_n_languages)
     for site_n_language in sites_n_languages:
         site, language = site_n_language
         df = pd.read_excel(f'{home}\\data\\{now}.xlsx', f'{site}_{language}')
         df_dic[site_n_language] = df
 
-    # return render_template('result.html', tables=df_lst)
-    return df.to_html()
+    return render_template('result.html', table=df.to_html())
+
+@app.route('/show')
+def show():
+    f'''
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <link href="https://andybrewer.github.io/mvp/mvp.css" rel="stylesheet"></link>
+        <title>Show</title>
+    </head>
+    <body>
+        
+    </body>
+    </html>
+    '''
 
 if __name__ == '__main__':
     now = datetime.now().strftime('%Y%m%d')
