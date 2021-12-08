@@ -16,7 +16,7 @@ def save():
 
     # 엑셀 파일 생성
     now = datetime.now().strftime('%Y%m%d')
-    writer = pd.ExcelWriter(f'home\\data\\{now}.xlsx', engine='xlsxwriter')
+    writer = pd.ExcelWriter(f'{home}\\data\\{now}.xlsx', mode='w', engine='xlsxwriter')
 
     total_lst = []
     for language in languages:

@@ -15,7 +15,7 @@
             <ul>
                 {% for language in languages %}
                     <li>
-                        <input type="checkbox" name="{{language}}" value="on">
+                        <input type="radio" name="language", value="{{language}}">
                         {{language}}</input>
                     </li>
                 {% endfor %}
@@ -24,7 +24,7 @@
             <ul>
                 {% for site in sites %}
                     <li>
-                        <input type="checkbox" name="{{site}}" value="on">
+                        <input type="radio" name="site" value="{{site}}">
                         {{site}}</input>
                     </li>
                 {% endfor %}
