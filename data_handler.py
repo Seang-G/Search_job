@@ -1,22 +1,22 @@
 from extractor import saramin, indeed, jobkorea
-import pandas as pd
 from datetime import datetime
+import pandas as pd
 import os
 import time
 
 sites = ['Saramin', 'Indeed', 'JobKorea']
 languages = ['C', 'C++', 'C#', 'Java', 'JavaScript', 'Python', 'Go']
+home = os.path.dirname(os.path.realpath(__file__))
+now = datetime.now().strftime('%Y%m%d')
 
-def save():
-    global sites
-    global languages
+def get_bdata():
+    return languages, sites
 
+def save_xlsx():
     start_time = time.time()
-    home = os.path.dirname(os.path.realpath(__file__))
 
     # 엑셀 파일 생성
-    now = datetime.now().strftime('%Y%m%d')
-    writer = pd.ExcelWriter(f'{home}\\data\\{now}.xlsx', mode='w', engine='xlsxwriter')
+    writer = pd.ExcelWriter(f'{home}/static/data.xlsx', mode='w', engine='xlsxwriter')
 
     total_lst = []
     for language in languages:
@@ -44,7 +44,13 @@ def save():
     total_time = int(time.time() - start_time)
     print(f'걸린 시간 : {total_time//60}분 {total_time%60}초')
 
-def get_bdata():
-    global sites
-    global languages
-    return languages, sites
+def save_totals():
+    with open(f'{home}/static/totals.csv', 'w') as f:
+        for language in languages:
+            f.write(str(saramin.get_total(language))+'\n')
+            f.write(str(indeed.get_total(language))+'\n')
+            f.write(str(jobkorea.get_total(language))+'\n')
+    
+def save_version():
+    with open(f'{home}/static/version.txt', 'w') as f:
+        f.write(now)

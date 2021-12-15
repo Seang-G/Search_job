@@ -10,27 +10,34 @@
         <h3>A service to extract jobs through seleted programming language</h3>
     </header>
     <main>
-        <form action="/result" method="get">
-            <h4>Select the programming languages you're interested on : </h4>
-            <ul>
-                {% for language in languages %}
-                    <li>
-                        <input type="radio" name="language" value="{{language}}">
-                        {{language}}</input>
-                    </li>
-                {% endfor %}
-            </ul>
-            <h4>Select the sites you want to search for : </h4>
-            <ul>
-                {% for site in sites %}
-                    <li>
-                        <input type="radio" name="site" value="{{site}}">
-                        {{site}}</input>
-                    </li>
-                {% endfor %}
-            </ul>
-            <button type='submit' value='Extract'>Extract</button>
-        </form>
+        <div>
+            <form action="/result" method="get">
+                <h4>Select the programming languages you're interested on : </h4>
+                <ul>
+                    {% for language in languages %}
+                        <li>
+                            <input type="radio" name="language" value="{{language}}">
+                            {{language}}</input>
+                        </li>
+                    {% endfor %}
+                </ul>
+                <h4>Select the sites you want to search for : </h4>
+                <ul>
+                    {% for site in sites %}
+                        <li>
+                            <input type="radio" name="site" value="{{site}}">
+                            {{site}}</input>
+                        </li>
+                    {% endfor %}
+                </ul>
+                <button type='submit' value='Extract'>Extract</button>
+                <a href="/download" download>Download All as Excel File</a>
+                <h4 alingn='left'>last update : {{version}}</h4>
+            </form>
+        </div>
+        <div>
+            <img src='{{url_for('static', filename='chart.png')}}' alt="chart">
+        </div>
     </main>
 </body>
 </html>
