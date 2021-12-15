@@ -22,7 +22,7 @@ def index():
 def result():
     selected_site = request.args.get('site')
     selected_language = request.args.get('language')
-    df = pd.read_excel(f'{home}/static/data.xlsx', f'{selected_site}_{selected_language}')
+    df = pd.read_excel(f'{home}/static/data.xlsx', f'{selected_site}_{selected_language}', engine='openpyxl')
     
     return make_table(df[:100].to_html(), selected_language, selected_site)
 
